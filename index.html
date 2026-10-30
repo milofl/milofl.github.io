@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Custom menu – milo_fl</title>
+<meta name="robots" content="noindex">
+<meta name="rta" content="RTA-5042-1996-1400-1577-RTA">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1c1026; --panel:#2a1a38; --ink:#fff2f8; --muted:#bfa9cf;
+  --pink:#ff8fc2; --blue:#8fd3ff; --line:#4a3560;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:17px/1.6 "DM Sans",system-ui,sans-serif;
+  background-image:radial-gradient(60rem 30rem at 85% -10%,#5a2a6b55,transparent),radial-gradient(40rem 25rem at -10% 40%,#1f4a6b44,transparent);}
+h1,h2,.price{font-family:"Bricolage Grotesque",system-ui,sans-serif}
+main{max-width:760px;margin:0 auto;padding:clamp(2rem,6vw,5rem) 1.25rem 4rem}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
+
+/* hero : bande trans en fond du pseudo */
+.hero{padding-bottom:2.5rem}
+.stripe{height:14px;border-radius:99px;margin-bottom:2rem;
+  background:linear-gradient(90deg,var(--blue) 0 20%,var(--pink) 20% 40%,#fff 40% 60%,var(--pink) 60% 80%,var(--blue) 80%)}
+h1{font-size:clamp(3rem,13vw,6.5rem);line-height:.95;font-weight:800;letter-spacing:-.03em}
+h1 small{display:block;font-size:.28em;font-weight:400;letter-spacing:0;color:var(--muted);margin-top:1rem}
+.hero p{max-width:34rem;margin-top:1.25rem;color:var(--muted)}
+.cta{display:inline-block;margin-top:1.75rem;padding:.8rem 1.4rem;border-radius:99px;background:var(--pink);
+  color:#2a0f20;font-weight:500;text-decoration:none;transition:transform .15s}
+.cta:hover{transform:translateY(-2px) rotate(-1deg)}
+
+h2{font-size:1.9rem;margin:3.5rem 0 1.25rem;font-weight:800}
+
+/* le menu */
+.menu{list-style:none;padding:0}
+.item{padding:1.25rem 0;border-top:1px dashed var(--line)}
+.item:last-child{border-bottom:1px dashed var(--line)}
+.row{display:flex;align-items:baseline;gap:.75rem}
+.row .name{font-weight:500;font-size:1.15rem}
+.row .dots{flex:1;border-bottom:2px dotted var(--line);transform:translateY(-4px)}
+.price{font-size:1.6rem;font-weight:800;color:var(--pink)}
+.item p{color:var(--muted);margin-top:.35rem;max-width:34rem}
+.tag{display:inline-block;margin-top:.5rem;font-size:.85rem;padding:.1rem .65rem;border-radius:99px;background:var(--panel);color:var(--blue)}
+
+.peeks{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+.peek{position:relative;aspect-ratio:3/4;border-radius:18px;overflow:hidden;display:grid;place-items:center;padding:1rem;
+  text-align:center;color:var(--muted);font-size:.9rem;background:linear-gradient(160deg,var(--panel),#3a2150);border:1.5px dashed var(--line)}
+.peek img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.peek.blur img{filter:blur(14px);transform:scale(1.1)}
+.peek.blur::after{content:"";position:absolute;inset:0}
+.tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem;margin-top:1.25rem}
+.tier{background:var(--panel);border-radius:18px;padding:1.4rem;border:1.5px solid var(--line);display:flex;flex-direction:column}
+.tier.top{border-color:var(--pink);background:linear-gradient(160deg,#3d2152,var(--panel))}
+.tier h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:1.25rem;font-weight:800}
+.tier .price{display:block;margin:.2rem 0 .6rem}
+.tier ul{padding-left:1.1rem;color:var(--muted);flex:1}
+.tier li{margin:.3rem 0}
+.tier .cta{margin-top:1.1rem;text-align:center}
+.tier.top .cta{background:var(--pink)}
+.tier .cta.alt{background:transparent;border:1.5px solid var(--blue);color:var(--blue)}
+.tier .cta.alt:hover{background:var(--blue);color:#10222e}
+.marquee{overflow:hidden;border-radius:18px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.track{display:flex;width:max-content;animation:scroll 45s linear infinite}
+.marquee:hover .track,.marquee:focus-within .track{animation-play-state:paused}
+.set{display:flex;gap:1rem;padding-right:1rem}
+.track .peek{flex:0 0 200px}
+@keyframes scroll{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.track{animation:none}.marquee{overflow-x:auto}.set[aria-hidden]{display:none}}
+.box{background:var(--panel);border-radius:18px;padding:1.5rem}
+.box ul{padding-left:1.1rem;color:var(--muted)}
+.box li{margin:.4rem 0}
+.box strong{color:var(--ink)}
+ol.steps{padding-left:2.75rem}
+ol.steps li{margin:.7rem 0;padding-left:.3rem}
+.contacts{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}
+.contacts a{padding:.6rem 1.1rem;border:1.5px solid var(--blue);border-radius:99px;text-decoration:none}
+.contacts a:hover{background:var(--blue);color:#10222e}
+footer{margin-top:4rem;color:var(--muted);font-size:.9rem}
+
+/* vérification d'âge */
+#gate{position:fixed;inset:0;z-index:10;background:var(--bg);display:grid;place-items:center;padding:1.5rem;text-align:center}
+#gate .inner{max-width:26rem}
+#gate h2{margin:1rem 0 .5rem}
+#gate p{color:var(--muted)}
+#gate .btns{display:flex;gap:.75rem;justify-content:center;margin-top:1.5rem;flex-wrap:wrap}
+#gate button{font:inherit;font-weight:500;padding:.75rem 1.4rem;border-radius:99px;border:0;cursor:pointer}
+#yes{background:var(--pink);color:#2a0f20}
+#no{background:var(--panel);color:var(--ink)}
+.locked main{display:none}
+.unlocked #gate{display:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body class="locked">
+
+<div id="gate" role="dialog" aria-modal="true" aria-labelledby="gt">
+  <div class="inner">
+    <div class="stripe"></div>
+    <h2 id="gt">Adults only</h2>
+    <p>This site contains adult content (18+). By entering, you confirm you are of legal age in your country.</p>
+    <div class="btns">
+      <button id="yes">I'm 18 or older</button>
+      <button id="no">Leave</button>
+    </div>
+  </div>
+</div>
+
+<main>
+  <header class="hero">
+    <div class="stripe"></div>
+    <h1>milo_fl<small>Custom femboy videos, made for you</small></h1>
+    <p>Tell me what you want to see and I'll film it just for you. Here's the menu, the prices and how to order.</p>
+    <a class="cta" href="#contact">Order</a>
+  </header>
+
+  <section aria-labelledby="menu-t">
+    <h2 id="menu-t">The menu</h2>
+    <ul class="menu">
+      <li class="item">
+        <div class="row"><span class="name">Mini custom</span><span class="dots"></span><span class="price">$5</span></div>
+        <p>Short video (2 to 3 min), a simple scenario of your choice.</p>
+        <span class="tag">Delivered within 3 days</span>
+      </li>
+      <li class="item">
+        <div class="row"><span class="name">Classic custom</span><span class="dots"></span><span class="price">$2/min</span></div>
+        <p>Video of 5 min minimum ($2 per minute), outfit and accessories of your choice, your name said out loud if you want.</p>
+        <span class="tag">Delivered within 5 days</span>
+      </li>
+      <li class="item">
+        <div class="row"><span class="name">Premium custom</span><span class="dots"></span><span class="price">$35</span></div>
+        <p>Video of 10 to 15 min, detailed scenario, multiple outfits, you approve the script before filming.</p>
+        <span class="tag">Delivered within 7 days</span>
+      </li>
+      <li class="item">
+        <div class="row"><span class="name">Voice message</span><span class="dots"></span><span class="price">$2</span></div>
+        <p>A personalized audio message, your name, your vibe.</p>
+        <span class="tag">Delivered within 48 h</span>
+      </li>
+    </ul>
+    <p style="margin-top:1rem;color:var(--muted)">Add-ons: face visible +$15, outfit supplied by you (free), rush delivery +$5.</p>
+  </section>
+
+  <section aria-labelledby="peeks-t">
+    <h2 id="peeks-t">Sneak peeks</h2>
+    <p style="color:var(--muted);margin-bottom:1rem">A little taste of my videos, hover to pause.</p>
+    <div class="marquee"><div class="track">
+      <div class="set"><figure class="peek"><span>Photo 1</span><img src="peeks/peek1.png" alt="Video sneak peek 1" loading="lazy" onerror="this.remove()"></figure><figure class="peek"><span>Photo 2</span><img src="peeks/peek2.png" alt="Video sneak peek 2" loading="lazy" onerror="this.remove()"></figure><figure class="peek"><span>Photo 3</span><img src="peeks/peek3.png" alt="Video sneak peek 3" loading="lazy" onerror="this.remove()"></figure><figure class="peek"><span>Photo 4</span><img src="peeks/peek4.jpg" alt="Video sneak peek 4" loading="lazy" onerror="this.remove()"></figure><figure class="peek"><span>Photo 5</span><img src="peeks/peek5.jpg" alt="Video sneak peek 5" loading="lazy" onerror="this.remove()"></figure><figure class="peek"><span>Photo 6</span><img src="peeks/peek6.jpg" alt="Video sneak peek 6" loading="lazy" onerror="this.remove()"></figure></div>
+      <div class="set" aria-hidden="true"><figure class="peek"><span>Photo 1</span><img src="peeks/peek1.jpg" alt="" loading="lazy" onerror="this.remove()"></figure><figure class="peek"><span>Photo 2</span><img src="peeks/peek2.jpg" alt="" loading="lazy" onerror="this.remove()"></figure><figure class="peek"><span>Photo 3</span><img src="peeks/peek3.jpg" alt="" loading="lazy" onerror="this.remove()"></figure><figure class="peek"><span>Photo 4</span><img src="peeks/peek4.jpg" alt="" loading="lazy" onerror="this.remove()"></figure><figure class="peek"><span>Photo 5</span><img src="peeks/peek5.jpg" alt="" loading="lazy" onerror="this.remove()"></figure><figure class="peek"><span>Photo 6</span><img src="peeks/peek6.jpg" alt="" loading="lazy" onerror="this.remove()"></figure></div>
+    </div></div>
+  </section>
+
+  <section aria-labelledby="how-t">
+    <h2 id="how-t">How to order</h2>
+    <ol class="steps box">
+      <li>Message me with the format you want and your idea.</li>
+      <li>I'll confirm if it's doable and give you the final price.</li>
+      <li>You pay, then I film.</li>
+      <li>I send you the video through a private link.</li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="rules-t">
+    <h2 id="rules-t">Rules</h2>
+    <div class="box">
+      <ul>
+        <li><strong>Adult customers only.</strong> No exceptions.</li>
+        <li>I refuse anything illegal, non-consensual, or involving minors.</li>
+        <li>I can decline any request without explanation.</li>
+        <li>Payment before filming, no refunds once the video is delivered.</li>
+        <li>No reselling or sharing my videos.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="sugar" aria-labelledby="sd-t">
+    <h2 id="sd-t">Become my sugar daddy</h2>
+    <p style="color:var(--muted)">Like my content and want to spoil me? Here's how to support me. It's voluntary, and it helps me make more videos.</p>
+    <div class="tiers">
+      <div class="tier">
+        <h3>Little gift</h3>
+        <span class="price">$5 one-time</span>
+        <ul><li>An unboxing video of your gift</li><li>I try it on camera</li><li>A little surprise on top</li></ul>
+        <a class="cta alt" href="https://ko-fi.com/milo_fl">Send a gift</a>
+      </div>
+      <div class="tier top">
+        <h3>Sugar daddy</h3>
+        <span class="price">$15 / month</span>
+        <ul><li>1 free video per month</li><li>Priority on your orders</li><li>10% off customs</li><li>A thank-you voice message every month</li></ul>
+        <a class="cta" href="https://ko-fi.com/milo_fl">Become a sugar daddy</a>
+      </div>
+      <div class="tier">
+        <h3>Big sugar daddy</h3>
+        <span class="price">$30 / month</span>
+        <ul><li>Free videos</li><li>Possibility to call me, by appointment</li><li>Exclusive videos, posted nowhere else</li></ul>
+        <a class="cta alt" href="https://ko-fi.com/milo_fl">Spoil me rotten</a>
+      </div>
+    </div>
+    <p style="margin-top:1rem;color:var(--muted);font-size:.9rem">Voluntary support between adults, no strings attached. No refunds. The perks are the ones listed above, nothing else is owed or promised. Calls are by appointment and I keep the right to decline or end them.</p>
+    <div class="contacts"><a href="https://www.amazon.com/hz/wishlist/ls/YOUR_LINK">My wishlist</a></div>
+  </section>
+
+  <section id="contact" aria-labelledby="c-t">
+    <h2 id="c-t">Contact me</h2>
+    <p style="color:var(--muted)">The fastest way is a private message.</p>
+    <div class="contacts">
+      <a href="https://www.reddit.com/user/milo_fl">Reddit</a>
+      <a href="https://t.me/milo_fl">Telegram</a>
+      <a href="mailto:ton@email.com">Email</a>
+    </div>
+  </section>
+
+  <footer>© 2026 milo_fl. 18+ content, all performers are adults and consenting.</footer>
+</main>
+
+<script>
+(function(){
+  var b=document.body, ok=false;
+  try{ ok=localStorage.getItem("age18")==="1"; }catch(e){}
+  function open(){ b.classList.remove("locked"); b.classList.add("unlocked"); }
+  if(ok) open();
+  document.getElementById("yes").addEventListener("click",function(){
+    try{ localStorage.setItem("age18","1"); }catch(e){}
+    open();
+  });
+  document.getElementById("no").addEventListener("click",function(){
+    location.href="https://www.google.com";
+  });
+})();
+</script>
+</body>
+</html>
